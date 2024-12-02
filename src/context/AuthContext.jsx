@@ -2,20 +2,51 @@ import React, { createContext, useState } from 'react';
 
 export const AuthContext = createContext();
 
-export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
 
-  const login = (userData) => {
-    setUser(userData);
-  };
+export const AuthProvider = ({ children }) => {
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const logout = () => {
-    setUser(null);
-  };
+    useEffect(() => {
+        const checkAuth = () => {
+            const token = sessionStorage.getItem('token');
+            const accessType = sessionStorage.getItem('accessType');
 
-  return (
-    <AuthContext.Provider value={{ user, login, logout }}>
-      {children}
-    </AuthContext.Provider>
-  );
-} 
+            if (!token || !accessType) {
+                sessionStorage.removeItem('token');
+                sessionStorage.removeItem('accessType');
+                setIsAuthenticated(false);
+            } else {
+                setIsAuthenticated(true);
+            }
+        };
+
+        // Verifica o token e o tipo de acesso ao carregar
+        checkAuth();
+
+        // Adiciona um listener para mudanças no sessionStorage
+        window.addEventListener('storage', checkAuth);
+
+        // Remove o listener ao desmontar
+        return () => {
+            window.removeEventListener('storage', checkAuth);
+        };
+    }, []);
+
+    const login = (token, accessType) => {
+        sessionStorage.setItem('token', token);
+        sessionStorage.setItem('accessType', accessType);
+        setIsAuthenticated(true);
+    };
+
+    const logout = () => {
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('accessType');
+        setIsAuthenticated(false);
+    };
+
+    return (
+        <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+            {children}
+        </AuthContext.Provider>
+    );
+  }
