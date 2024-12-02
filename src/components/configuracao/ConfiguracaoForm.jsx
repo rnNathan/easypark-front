@@ -1,6 +1,6 @@
 import React from 'react';
 import { Input } from '../input/Input';
-import { Button } from '../button/Button';
+import { Button } from '../button/button';
 
 export function ConfiguracaoForm({ configuracao, handleChange, handleSubmit }) {
   return (
