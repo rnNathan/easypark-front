@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "../../components/button/button";
-import './CaixaPage.css';
+import './CaixaHome.css';
 
 export function CaixaPage() {
   const navigate = useNavigate();
