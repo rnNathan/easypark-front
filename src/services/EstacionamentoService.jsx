@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://easypark-back.onrender.com/api/configuracoes';
+const API_URL = 'https://easypark-back.onrender.com/configuracoes';
 
 // Configuração de instância do axios
 const api = axios.create({
