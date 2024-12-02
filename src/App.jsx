@@ -5,7 +5,7 @@ import { CaixaHome } from "./pages/CaixaHome/CaixaHome";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
 import { ConfiguracaoEstacionamento } from "./pages/ConfiguracaoEstacionamento/ConfiguracaoEstacionamento";
-// import { ConfiguracaoAcesso } from "./pages/ConfiguracaoAcesso/ConfiguracaoAcesso";
+//import { ConfiguracaoAcesso } from "./pages/ConfiguracaoAcesso/ConfiguracaoAcesso";
 
 function App() {
   return (
